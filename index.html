@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="https://sdk-cdn.mypurecloud.com/javascript/39.0.0/purecloud-platform-client-v2.min.js"></script>
+    <link rel="stylesheet" href="https://minio.gdemofr.ovh/dev-assets/font-awesome.min.css">
+    <link rel="stylesheet" href="https://minio.gdemofr.ovh/dev-assets/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://minio.gdemofr.ovh/dev-assets/vue.js"></script>
+
+  </head>
+  <body>
+
+    <div id="app" class="container">
+      <!-- Choix du groupe -->
+      <div class="row" style="margin-top:20px;">
+        <div class="col-auto my-1">
+          <label for="inlineFormInputName">Choisir le groupe d'utilisateurs</label>
+          <input type="text" class="form-control" list="groupList" v-model="selectedGroupName" />
+          <datalist id="groupList">
+            <option v-for="group in groups" :value="group.name" />
+          </datalist>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top:20px;margin-left:20px; margin-right:20px;">
+        <div style="margin-top: 20px;">
+          <!-- On affiche tous les users gu group, leur image et leur statut -->
+          <div v-for="user in users" :class="getStatusClass(user)" style="display: inline-block; border-radius: 50%; position: relative; margin-right:8px;">
+            <img :src="getUserImage(user)" class="userImage" style="border-radius: 50%;padding: 4px;">
+            <!-- Bouton pour changer le statut d'un utilisateur en "Offline"-->
+            <div style="width: 16px;height: 16px;position: absolute;right: 0;background: grey;border-radius: 16px;border: 1px solid white; cursor: pointer;" @click="setUserOffline(user)"></div>
+          </div>
+          <div style="clear:both;"></div>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript" src="index.js"></script>
+  </body>
+</html>
